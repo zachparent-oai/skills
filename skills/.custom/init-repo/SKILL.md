@@ -9,6 +9,11 @@ Use this skill when a user asks to start a new project or bootstrap an empty rep
 
 ## Workflow
 
+If required dependencies are missing in this environment, bootstrap them first:
+
+- `$install-skills https://github.com/openai/skills/tree/main/skills/.custom/zach-stack`
+- `$install-skills https://github.com/openai/skills/tree/main/skills/.custom/configure-codex`
+
 1. Capture constraints and ask clarifying questions only if ambiguous.
 2. Choose a stack profile: web, python, visualization, or mixed.
 3. Create a phase-1 scaffold that is minimal but complete:
