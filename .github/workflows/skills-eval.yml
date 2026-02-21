@@ -19,7 +19,7 @@ jobs:
           python-version: '3.12'
 
       - name: Run skill lint and structure tests
-        run: bash scripts/test-custom-skills.sh
+        run: uv run scripts/test-custom-skills.py
 
   eval-skills-suite:
     needs: lint-and-test
@@ -34,4 +34,4 @@ jobs:
           python-version: '3.12'
 
       - name: Run skill evals
-        run: python3 scripts/run-skill-evals.py .custom/evals
+        run: uv run scripts/run-skill-evals.py

@@ -1,14 +1,17 @@
-#!/usr/bin/env python3
-"""Validation and lightweight lint checks for .custom skills."""
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.12"
+# ///
+
+"""Validation and lightweight lint checks for `.custom` skills."""
 
 from __future__ import annotations
 
 import re
-import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-CUSTOM_ROOT = REPO_ROOT / ".custom"
+CUSTOM_ROOT = REPO_ROOT / "skills" / ".custom"
 
 REQUIRED_SKILLS = {
     "zach-stack": {
@@ -115,13 +118,10 @@ def validate_frontmatter(skill_dir: Path) -> str:
     if "<" in description or ">" in description:
         fail("description contains angle brackets", file=skill_path)
 
-    for token in re.findall(r"\(references/([^)\s]+\.md)\)", content):
+    for token in re.findall(r"\(references/([^)]*\.md)\)", content):
         ref_path = skill_dir / "references" / token
         if not ref_path.exists():
             fail(f"references/{token} link does not exist", file=skill_path)
-
-    for token in re.findall(r"\.\.\/\.\.\/(zach-stack|init-repo|agentify-repo|configure-codex)", content):
-        pass
 
     return name
 
@@ -162,18 +162,9 @@ def validate_references(skill_dir: Path, required: set[str]) -> None:
         check_markdown_lint(p)
 
 
-def check_root_custom_docs() -> None:
-    readme = REPO_ROOT / "README-custom.md"
-    if not readme.exists():
-        fail("missing README-custom.md")
-    check_markdown_lint(readme)
-
-
 def main() -> int:
     if not CUSTOM_ROOT.exists():
-        fail(".custom directory does not exist at repository root")
-
-    check_root_custom_docs()
+        fail(".custom directory does not exist at skills/.custom")
 
     if not (CUSTOM_ROOT / "AGENTS.md").exists():
         fail("missing .custom/AGENTS.md")

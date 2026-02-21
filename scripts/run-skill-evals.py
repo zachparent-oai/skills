@@ -1,5 +1,9 @@
-#!/usr/bin/env python3
-"""Simple rule-based evaluator for .custom skills (eval-skills inspired)."""
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.12"
+# ///
+
+"""Simple rule-based evaluator for `.custom` skills (eval-skills inspired)."""
 
 from __future__ import annotations
 
@@ -7,11 +11,11 @@ import json
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-EVAL_DIR = Path(__file__).resolve().parents[1] / ".custom" / "evals"
+EVAL_DIR = REPO / "skills" / ".custom" / "evals"
 
 
 def run_eval(skill_name: str, spec: dict[str, object]) -> dict[str, object]:
-    skill_dir = REPO / ".custom" / skill_name
+    skill_dir = REPO / "skills" / ".custom" / skill_name
     checks = spec.get("checks", [])
     passed = 0
     failed = []
@@ -28,7 +32,6 @@ def run_eval(skill_name: str, spec: dict[str, object]) -> dict[str, object]:
 
         elif kind == "frontmatter_name":
             skill_md = (skill_dir / "SKILL.md").read_text()
-            # very lightweight check: verify name is present in frontmatter block
             ok = f"name: {skill_name}" in skill_md
             if not ok:
                 failed.append(
@@ -72,7 +75,7 @@ def run_eval(skill_name: str, spec: dict[str, object]) -> dict[str, object]:
 
 def main() -> int:
     if not EVAL_DIR.exists():
-        print("No evals directory found: .custom/evals")
+        print("No evals directory found: skills/.custom/evals")
         return 1
 
     results = []

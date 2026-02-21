@@ -1,0 +1,9 @@
+{
+  "skill": "agentify-repo",
+  "checks": [
+    {"kind": "file_exists", "path": "SKILL.md"},
+    {"kind": "frontmatter_name"},
+    {"kind": "contains_reference", "reference": "incremental-harness.md"},
+    {"kind": "contains_link", "text": "phases"}
+  ]
+}

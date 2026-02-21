@@ -1,0 +1,9 @@
+{
+  "skill": "zach-stack",
+  "checks": [
+    {"kind": "file_exists", "path": "SKILL.md"},
+    {"kind": "frontmatter_name"},
+    {"kind": "contains_reference", "reference": "resources.md"},
+    {"kind": "contains_link", "text": "references/web.md"}
+  ]
+}
