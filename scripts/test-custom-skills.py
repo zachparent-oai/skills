@@ -1,6 +1,7 @@
 #!/usr/bin/env -S uv run
 # /// script
 # requires-python = ">=3.12"
+# dependencies = ["typer>=0.12"]
 # ///
 
 """Run all custom-skill lint/validation checks."""
@@ -8,35 +9,40 @@
 from __future__ import annotations
 
 import subprocess
-import sys
+import typer
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+app = typer.Typer(help="Run the custom-skill lint/eval pipeline.")
 
-def run(command: list[str], cwd: Path) -> None:
+
+def run_command(command: list[str]) -> None:
     result = subprocess.run(
         command,
-        cwd=cwd,
+        cwd=ROOT,
         check=False,
     )
     if result.returncode != 0:
         raise SystemExit(result.returncode)
 
 
-def main() -> int:
-    root = Path(__file__).resolve().parents[1]
-
+def run_pipeline() -> int:
     print(">=> lint: validate custom skill structure and markdown style")
-    run([sys.executable, "scripts/validate-custom-skills.py"], root)
+    run_command(["uv", "run", "scripts/validate-custom-skills.py"])
 
-    print(">=> compile: sync .custom skills into .codex/skills")
-    run([sys.executable, "scripts/sync-custom-skills.py"], root)
-
-    print(">=> verify: ensure .codex/skills mirrors .custom")
-    run([sys.executable, "scripts/verify-custom-skill-mirror.py"], root)
+    print(">=> sync+check: sync .custom skills and verify mirror")
+    run_command(["uv", "run", "scripts/sync-custom-skills.py", "sync"])
+    run_command(["uv", "run", "scripts/sync-custom-skills.py", "check"])
 
     print("PASS: custom skill lint/tests complete")
     return 0
 
 
+@app.callback(invoke_without_command=True)
+def main() -> None:
+    """Run validation + sync/check pipeline."""
+    raise typer.Exit(code=run_pipeline())
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    app()

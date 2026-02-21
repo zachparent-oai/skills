@@ -10,4 +10,4 @@
 
 ## Linting and tests
 
-Run `bash scripts/test-custom-skills.sh` before committing changes to `.custom` skills.
+Run `uv run scripts/test-custom-skills.py` before committing `.custom` changes.

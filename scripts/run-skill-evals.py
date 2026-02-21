@@ -1,17 +1,21 @@
 #!/usr/bin/env -S uv run
 # /// script
 # requires-python = ">=3.12"
+# dependencies = ["typer>=0.12"]
 # ///
 
 """Simple rule-based evaluator for `.custom` skills (eval-skills inspired)."""
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
+import json
+import typer
 
 REPO = Path(__file__).resolve().parents[1]
-EVAL_DIR = REPO / "skills" / ".custom" / "evals"
+DEFAULT_EVAL_DIR = REPO / "skills" / ".custom" / "evals"
+
+app = typer.Typer(help="Run eval checks for `.custom` skills.")
 
 
 def run_eval(skill_name: str, spec: dict[str, object]) -> dict[str, object]:
@@ -73,13 +77,13 @@ def run_eval(skill_name: str, spec: dict[str, object]) -> dict[str, object]:
     }
 
 
-def main() -> int:
-    if not EVAL_DIR.exists():
-        print("No evals directory found: skills/.custom/evals")
+def run_evals(eval_dir: Path) -> int:
+    if not eval_dir.exists():
+        print(f"No evals directory found: {eval_dir}")
         return 1
 
     results = []
-    for spec_file in sorted(EVAL_DIR.glob("*.json")):
+    for spec_file in sorted(eval_dir.glob("*.json")):
         data = json.loads(spec_file.read_text())
         skill_name = str(data.get("skill"))
         results.append(run_eval(skill_name, data))
@@ -96,5 +100,17 @@ def main() -> int:
     return 0
 
 
+@app.callback(invoke_without_command=True)
+def main(
+    eval_dir: Path = typer.Option(
+        DEFAULT_EVAL_DIR,
+        "--eval-dir",
+        help="Path to JSON eval specs.",
+    ),
+) -> None:
+    """Run all `.custom` skill eval specs."""
+    raise typer.Exit(code=run_evals(eval_dir))
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    app()

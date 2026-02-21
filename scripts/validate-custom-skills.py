@@ -1,6 +1,7 @@
 #!/usr/bin/env -S uv run
 # /// script
 # requires-python = ">=3.12"
+# dependencies = ["typer>=0.12"]
 # ///
 
 """Validation and lightweight lint checks for `.custom` skills."""
@@ -8,6 +9,7 @@
 from __future__ import annotations
 
 import re
+import typer
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -71,6 +73,9 @@ def check_markdown_lint(path: Path) -> None:
             fail("missing YAML frontmatter end marker", file=path)
         if not re.search(r"^# ", content, re.M):
             fail("missing top-level markdown heading", file=path)
+
+
+app = typer.Typer(help="Validate skill definitions in skills/.custom.")
 
 
 def parse_frontmatter(lines: list[str]) -> dict[str, str]:
@@ -162,16 +167,16 @@ def validate_references(skill_dir: Path, required: set[str]) -> None:
         check_markdown_lint(p)
 
 
-def main() -> int:
-    if not CUSTOM_ROOT.exists():
+def run_validation(custom_root: Path = CUSTOM_ROOT) -> int:
+    if not custom_root.exists():
         fail(".custom directory does not exist at skills/.custom")
 
-    if not (CUSTOM_ROOT / "AGENTS.md").exists():
+    if not (custom_root / "AGENTS.md").exists():
         fail("missing .custom/AGENTS.md")
 
     custom_skills = [
         p
-        for p in sorted(CUSTOM_ROOT.iterdir())
+        for p in sorted(custom_root.iterdir())
         if p.is_dir() and not p.name.startswith(".") and (p / "SKILL.md").exists()
     ]
 
@@ -186,5 +191,15 @@ def main() -> int:
     return 0
 
 
+@app.callback(invoke_without_command=True)
+def main(
+    custom_root: Path = typer.Option(
+        CUSTOM_ROOT, "--custom-root", "-c", help="Path to .custom skills directory."
+    ),
+) -> None:
+    """Run `.custom` skill validation."""
+    raise typer.Exit(code=run_validation(custom_root))
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    app()

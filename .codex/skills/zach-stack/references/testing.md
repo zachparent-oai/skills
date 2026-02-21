@@ -14,7 +14,7 @@
 - Add focused unit tests for parsing, argument validation, and command routing.
 - Add integration-style tests for command side effects (filesystem, subprocess calls, exit codes).
 - For **Typer** CLIs:
-  - test commands via `CliRunner` or equivalent runner-style invocation with synthetic args
+  - test commands with `click.testing.CliRunner` syntax (Typer uses Click internally)
   - verify exit codes and output
   - verify help text and global options
 - For **Click** CLIs:
@@ -31,3 +31,15 @@
 
 - Every major behavior change should include an updated doc entry describing intent and validation command.
 - Avoid relying on broad integration tests only; use focused tests for failure isolation.
+
+## CLI command style for single-command scripts
+
+- For scripts intended to have a single action, prefer exposing the behavior on the default command and avoid a dedicated `run` subcommand label.
+- This keeps invocation simple for agents: `uv run scripts/<tool>.py`.
+
+## Examples
+
+- `uv run scripts/validate-custom-skills.py` (default entrypoint)
+- `uv run scripts/run-skill-evals.py`
+- `uv run scripts/test-custom-skills.py`
+- `uv run scripts/sync-custom-skill.py sync --dry-run`
