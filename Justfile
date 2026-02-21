@@ -1,5 +1,5 @@
 default:
-  @echo "Run: just test"
+  @just --list
 
 pre-commit:
   PRE_COMMIT_HOME=.pre-commit-cache pre-commit install --install-hooks
@@ -10,18 +10,12 @@ pre-commit-check:
 test:
   uv run scripts/test-custom-skills.py
 
-sync-custom-skills:
-  uv run scripts/sync-custom-skills.py
-
-agentify-sync:
+sync-skills:
   uv run scripts/sync-custom-skills.py sync
 
-agentify-check:
+check-skills:
   uv run scripts/sync-custom-skills.py check
 
-agentify-status:
-  uv run scripts/sync-custom-skills.py check
-
-agentify-checks:
+checks:
   uv run scripts/test-custom-skills.py
   uv run scripts/run-skill-evals.py

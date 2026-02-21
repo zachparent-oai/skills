@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 import typer
 
@@ -21,7 +22,16 @@ app = typer.Typer(help="Run eval checks for `.custom` skills.")
 
 def run_eval(skill_name: str, spec: dict[str, object]) -> dict[str, object]:
     skill_dir = REPO / "skills" / ".custom" / skill_name
-    checks = spec.get("checks", [])
+    checks_raw = spec.get("checks", [])
+    checks: list[dict[str, Any]]
+    if isinstance(checks_raw, list):
+        checks = [
+            check
+            for check in checks_raw
+            if isinstance(check, dict)
+        ]
+    else:
+        checks = []
     passed = 0
     failed = []
 
@@ -83,7 +93,7 @@ def run_evals(eval_dir: Path) -> int:
         print(f"No evals directory found: {eval_dir}")
         return 1
 
-    results = []
+    results: list[dict[str, object]] = []
     for spec_file in sorted(eval_dir.glob("*.json")):
         data = json.loads(spec_file.read_text())
         skill_name = str(data.get("skill"))
@@ -94,8 +104,13 @@ def run_evals(eval_dir: Path) -> int:
     failed = [r for r in results if r["status"] == "FAIL"]
     if failed:
         for item in failed:
-            print("FAIL", item["skill"], "::", ", ".join(item["failures"]))
-        return 1
+            failures = item["failures"]
+            if isinstance(failures, list):
+                fail_messages = ", ".join(str(f) for f in failures)
+            else:
+                fail_messages = str(failures)
+            print("FAIL", item["skill"], "::", fail_messages)
+            return 1
 
     print("PASS: all skill evals passed")
     return 0
