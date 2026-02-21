@@ -1,6 +1,6 @@
 ---
 name: zach-stack
-description: "Define opinionated conventions for testable, well-documented, agent-friendly repos. Use for stack selection and implementation defaults."
+description: "Define opinionated conventions for testable, well-documented, agent-friendly repos. Use for stack selection and application defaults."
 ---
 
 # Zach-Stack
@@ -30,11 +30,13 @@ Use this skill when asked to define or apply a preferred stack for a new/existin
 - **CSS**: default to Tailwind.
 - **Python work**: use `uv` for package management and virtual environments.
 - **Workspaces**: prefer workspace-based organization for multi-module projects.
-- **Testing**: include both targeted unit tests and at least one integration/acceptance layer.
+- **CLI stack**: prefer **Typer** for new CLIs; use **Click** when existing codebases already use it.
+- **Testing**: add targeted unit tests and at least one integration/acceptance layer.
 - **Frontend checks**: include automated checks that cover real user workflows.
 - **Playwright path**: use Playwright CLI for exploration and flow debugging; use Playwright-driven E2E where applicable.
 - **Visualization**: prefer Streamlit + Plotly for analytics UI.
 - **Project shape for shared data**: use a dedicated workspace/module for data, plus workspace boundaries for Streamlit/compute when needed.
+- **Standalone scripts**: keep CLIs standalone with minimal dependencies and explicit script-level dependency boundaries; keep CLIs minimally scoped.
 - **Docs as source of truth**: every project must have `docs/` and keep it current with code changes.
 - **Automation**: include `Justfile` in most repos for repeatable agent tasks.
 - **Pre-commit**: always define pre-commit via project-native tooling (`pnpm` or `uv`).
