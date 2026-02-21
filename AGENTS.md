@@ -11,3 +11,12 @@
 ## Linting and tests
 
 Run `uv run scripts/test-custom-skills.py` before committing `.custom` changes.
+
+Install pre-commit hooks once with:
+`PRE_COMMIT_HOME=.pre-commit-cache pre-commit install --install-hooks`.
+
+Run pre-commit checks:
+`pre-commit run --all-files` (or `just pre-commit-check`).
+
+Hooks install command in this repo uses a local pre-commit home:
+`PRE_COMMIT_HOME=.pre-commit-cache pre-commit install --install-hooks`.

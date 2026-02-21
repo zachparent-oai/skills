@@ -9,8 +9,9 @@
 from __future__ import annotations
 
 import subprocess
-import typer
 from pathlib import Path
+
+import typer
 
 ROOT = Path(__file__).resolve().parents[1]
 app = typer.Typer(help="Run the custom-skill lint/eval pipeline.")

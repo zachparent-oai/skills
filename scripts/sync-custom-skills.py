@@ -8,8 +8,9 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 import shutil
+from pathlib import Path
+
 import typer
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -87,11 +88,7 @@ def list_skill_dirs(root: Path) -> dict[str, set[tuple[str, ...]]]:
             continue
         if not (path / "SKILL.md").is_file():
             continue
-        files = {
-            tuple(p.relative_to(path).parts)
-            for p in path.rglob("*")
-            if p.is_file()
-        }
+        files = {tuple(p.relative_to(path).parts) for p in path.rglob("*") if p.is_file()}
         skills[path.name] = files
     return skills
 
@@ -107,9 +104,13 @@ def check_skills(custom_root: Path, mirror_root: Path) -> int:
         missing = custom_names - mirror_names
         extra = mirror_names - custom_names
         if missing:
-            raise SystemExit(f"FAIL: missing mirrored skills in .codex/skills: {', '.join(sorted(missing))}")
+            raise SystemExit(
+                "FAIL: missing mirrored skills in .codex/skills:" f" {', '.join(sorted(missing))}"
+            )
         if extra:
-            raise SystemExit(f"FAIL: unexpected extra skills in .codex/skills: {', '.join(sorted(extra))}")
+            raise SystemExit(
+                "FAIL: unexpected extra skills in .codex/skills:" f" {', '.join(sorted(extra))}"
+            )
 
     for name in sorted(custom_names):
         if custom_skills[name] != mirror_skills.get(name, set()):
@@ -151,7 +152,11 @@ def sync(
         "--mirror-root",
         help="Target directory for mirrored skills.",
     ),
-    dry_run: bool = typer.Option(False, "--dry-run", help="Show planned sync updates without writing files."),
+    dry_run: bool = typer.Option(
+        False,
+        "--dry-run",
+        help="Show planned sync updates without writing files.",
+    ),
 ) -> None:
     """Copy `.custom` skills into `.codex/skills`."""
     _run_sync(custom_root=custom_root, mirror_root=mirror_root, dry_run=dry_run)
@@ -177,7 +182,11 @@ def check(
 @app.callback(invoke_without_command=True)
 def _default(ctx: typer.Context) -> None:
     if ctx.invoked_subcommand is None:
-        sync(custom_root=str(DEFAULT_CUSTOM_ROOT), mirror_root=str(DEFAULT_MIRROR_ROOT), dry_run=False)
+        sync(
+            custom_root=str(DEFAULT_CUSTOM_ROOT),
+            mirror_root=str(DEFAULT_MIRROR_ROOT),
+            dry_run=False,
+        )
 
 
 if __name__ == "__main__":

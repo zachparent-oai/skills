@@ -9,8 +9,9 @@
 from __future__ import annotations
 
 import re
-import typer
 from pathlib import Path
+
+import typer
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CUSTOM_ROOT = REPO_ROOT / "skills" / ".custom"
@@ -112,7 +113,10 @@ def validate_frontmatter(skill_dir: Path) -> str:
 
     name = fm["name"].strip()
     if not SKILL_NAME_RE.match(name):
-        fail(f"invalid skill name '{name}' in frontmatter; expected lower-case hyphen name", file=skill_path)
+        fail(
+            f"invalid skill name '{name}' in frontmatter; " "expected lower-case hyphen name",
+            file=skill_path,
+        )
 
     if name != skill_dir.name:
         fail(f"frontmatter name '{name}' must match directory '{skill_dir.name}'", file=skill_path)
@@ -153,11 +157,7 @@ def validate_references(skill_dir: Path, required: set[str]) -> None:
             fail("missing references directory", file=skill_dir)
         return
 
-    actual = {
-        p.name
-        for p in refs_dir.glob("*.md")
-        if p.is_file()
-    }
+    actual = {p.name for p in refs_dir.glob("*.md") if p.is_file()}
     missing = required - actual
     if missing:
         missing_str = ", ".join(sorted(missing))
