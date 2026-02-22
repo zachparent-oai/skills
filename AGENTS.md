@@ -8,6 +8,13 @@
 - Do not add scripts unless they are essential and deterministic.
 - No README/CHANGELOG style collateral is required inside a skill.
 
+## Skills repo editing workflow
+
+- For updates to existing skills, keep `SKILL.md` compact and put detailed procedures/examples under the skill's `references/` files.
+- Before editing, read the target `SKILL.md` and only the referenced files needed for the requested change (avoid broad reference-chasing).
+- When adding guidance about another skill (for example `$playwright`), first check whether it is installed under `$CODEX_HOME/skills`; if not, document the `$skill-installer` path and any required restart step.
+- When documenting external tools in `references/`, include source links and short excerpts instead of long copied passages.
+
 ## Linting and tests
 
 Run `uv run scripts/test-custom-skills.py` before committing `.custom` changes.
