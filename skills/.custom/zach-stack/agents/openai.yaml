@@ -1,4 +1,6 @@
 interface:
   display_name: "Zach Stack"
   short_description: "Opinionated stack defaults for agent-friendly repos."
+  icon_small: "./assets/zach-stack-small.svg"
+  icon_large: "./assets/zach-stack.png"
   default_prompt: "Use $zach-stack to define technology and workflow defaults for the repo."

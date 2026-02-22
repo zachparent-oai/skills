@@ -1,4 +1,6 @@
 interface:
   display_name: "Remember That"
   short_description: "Capture reusable rules into docs or AGENTS.md while keeping AGENTS light."
+  icon_small: "./assets/remember-that-small.svg"
+  icon_large: "./assets/remember-that.png"
   default_prompt: "Use $remember-that to capture a learned reusable rule in the right docs file or, when needed, AGENTS.md."

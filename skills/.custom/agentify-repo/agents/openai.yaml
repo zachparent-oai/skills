@@ -1,4 +1,6 @@
 interface:
   display_name: "Agentify Repo"
   short_description: "Incrementally harden existing repos with zach-stack conventions."
+  icon_small: "./assets/agentify-repo-small.svg"
+  icon_large: "./assets/agentify-repo.png"
   default_prompt: "Use $agentify-repo to add agent-friendly tooling in safe milestones."
