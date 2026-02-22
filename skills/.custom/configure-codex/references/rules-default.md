@@ -45,3 +45,10 @@ codex execpolicy check --pretty --rules .codex/rules/default.rules -- uv sync
 
 Use the same command for any command you changed in the allow list.
 
+## Review checklist (after edits)
+
+- Syntax/load check: run `codex execpolicy check` for each newly allowed command family.
+- Positive check: verify at least one intended command now matches/loads successfully.
+- Negative check: verify a nearby command that should remain blocked is still denied (or does not match the new rule).
+- Scope check: confirm whether the change was applied to repo-scoped `.codex/rules/default.rules` or user-level `$CODEX_HOME/rules/default.rules`, and note why.
+- Rollback note: record the exact rule entries added/changed so they can be removed quickly if behavior is too broad.
