@@ -1,0 +1,4 @@
+interface:
+  display_name: "Configure Codex"
+  short_description: "Set up codex rules and environment configuration safely."
+  default_prompt: "Use $configure-codex to propose and apply safe Codex configuration updates."

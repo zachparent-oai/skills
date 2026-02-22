@@ -1,0 +1,9 @@
+{
+  "skill": "init-repo",
+  "checks": [
+    {"kind": "file_exists", "path": "SKILL.md"},
+    {"kind": "frontmatter_name"},
+    {"kind": "contains_reference", "reference": "new-repo-runbook.md"},
+    {"kind": "contains_link", "text": "zach-stack"}
+  ]
+}

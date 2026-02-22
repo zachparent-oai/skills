@@ -1,0 +1,4 @@
+interface:
+  display_name: "Zach Stack"
+  short_description: "Opinionated stack defaults for agent-friendly repos."
+  default_prompt: "Use $zach-stack to define technology and workflow defaults for the repo."

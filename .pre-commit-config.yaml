@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.4
+    hooks:
+      - id: ruff
+        name: ruff lint
+        args: ["--fix", "--exit-non-zero-on-fix"]
+      - id: ruff-format
+        name: ruff format
+
+  - repo: local
+    hooks:
+      - id: skills-lint
+        name: custom skills lint/tests
+        entry: ./scripts/test-custom-skills.py
+        language: system
+        pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: skills-evals
+        name: custom skill evals
+        entry: ./scripts/run-skill-evals.py
+        language: system
+        pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: mypy-scripts
+        name: mypy script type check
+        entry: uv run mypy
+        language: system
+        files: ^scripts/.*\.py$
