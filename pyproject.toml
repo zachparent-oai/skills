@@ -5,7 +5,6 @@ description = "Personal tooling and skill-catalog support scripts for the skills
 requires-python = ">=3.12"
 dependencies = [
   "typer>=0.12",
-  "pytest>=8.3",
   "pre-commit>=3.7",
   "ruff>=0.6",
   "mypy>=1.10",
@@ -40,9 +39,4 @@ exclude = [
   "skills/.codex",
   ".git",
   ".venv",
-]
-
-[tool.pytest.ini_options]
-markers = [
-  "codex_eval: runs end-to-end Codex skill evaluations (opt-in via env vars)",
 ]

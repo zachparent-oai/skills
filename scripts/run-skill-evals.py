@@ -300,14 +300,11 @@ def run_evals(eval_dir: Path) -> int:
         print(f"FAIL: eval path is not a directory: {eval_dir}")
         return 1
 
-    suite_dirs = []
-    for path in sorted(eval_dir.iterdir()):
-        if not path.is_dir() or path.name.startswith("."):
-            continue
-        # Only treat directories with the expected static-eval files as suites.
-        if not (path / "prompt_set.csv").exists() or not (path / "test.jsonl").exists():
-            continue
-        suite_dirs.append(path)
+    suite_dirs = [
+        path
+        for path in sorted(eval_dir.iterdir())
+        if path.is_dir() and not path.name.startswith(".")
+    ]
     if not suite_dirs:
         print(f"FAIL: no eval suites found in {eval_dir}")
         return 1
