@@ -1,4 +1,6 @@
 interface:
   display_name: "Troubleshoot Sandbox"
   short_description: "Diagnose sandbox, permissions, network, and command execution failures in Codex."
+  icon_small: "./assets/troubleshoot-sandbox-small.svg"
+  icon_large: "./assets/troubleshoot-sandbox.png"
   default_prompt: "Use $troubleshoot-sandbox to diagnose why a command failed (sandbox, write access, network, rules, or missing tools) and suggest the safest next step."

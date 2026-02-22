@@ -1,4 +1,6 @@
 interface:
   display_name: "Configure Codex"
   short_description: "Set up codex rules and environment configuration safely."
+  icon_small: "./assets/configure-codex-small.svg"
+  icon_large: "./assets/configure-codex.png"
   default_prompt: "Use $configure-codex to propose and apply safe Codex configuration updates."

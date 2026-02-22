@@ -1,4 +1,6 @@
 interface:
   display_name: "Init Repo"
   short_description: "Bootstrap a new repo with testable and agent-friendly defaults."
+  icon_small: "./assets/init-repo-small.svg"
+  icon_large: "./assets/init-repo.png"
   default_prompt: "Use $init-repo to scaffold a new repository with zach-stack conventions."
