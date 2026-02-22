@@ -33,8 +33,7 @@ It covers dataset creation/augmentation (CSV and JSON), harness design and maint
 - `references/datasets.md`: dataset schemas, CSV/JSON strategy, augmentation and regeneration.
 - `references/harnesses.md`: harness structure, subset-first execution, metrics, and hill-climb loops.
 - `references/streamlit-evals-app.md`: recommendations and a Streamlit template for running/viewing evals.
-- `../zach-stack/references/python.md`: shared Streamlit + Plotly analytics app conventions.
-- `../zach-stack/references/workspaces.md`: workspace split guidance for data/harness/UI boundaries.
+- `$zach-stack`: shared Python/CLI defaults (Typer), Streamlit + Plotly guidance, and workspace boundary conventions.
 
 ## Asset template
 

@@ -13,10 +13,11 @@ This is most useful after the harness CLI exists and writes structured artifacts
 
 ## Shared conventions (existing docs)
 
-Read these shared docs first:
+Read `$zach-stack` first, then load the relevant Python/workspace references inside that skill for:
 
-- `../zach-stack/references/python.md` for Streamlit + Plotly and app architecture conventions.
-- `../zach-stack/references/workspaces.md` for separating data/harness/UI boundaries.
+- Streamlit + Plotly app conventions
+- data/harness/UI boundary guidance
+- CLI defaults (Typer) that the Streamlit app can call or mirror
 
 ## Template
 

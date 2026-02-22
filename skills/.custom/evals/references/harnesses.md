@@ -104,6 +104,46 @@ Only run the large dataset after:
 - Avoid silently changing schemas; use a schema version field.
 - Keep the harness CLI stable so CI/nightly jobs and Streamlit UI can call it.
 
+## Eval CLI recommendations
+
+Use `$zach-stack` conventions for the CLI shape: prefer Typer for new eval CLIs.
+
+### Required CLI options
+
+- `--limit`: default to a small value for local smoke/debug runs; expand later.
+- `--num-threads`: required for parallel execution. Evals can take a long time, so the harness must support concurrency.
+
+Use a Python parameter name like `num_threads` and expose it as `--num-threads` in Typer.
+
+### Progress bars
+
+Use `tqdm` for row-level progress and long-running batches.
+
+- Show completed/total rows.
+- Include throughput (rows/sec) when possible.
+- Keep progress bars enabled by default for local runs.
+
+### Suggested Typer command shape
+
+```python
+import typer
+from tqdm.auto import tqdm
+
+app = typer.Typer()
+
+@app.command()
+def run(
+    dataset: str,
+    limit: int | None = typer.Option(None, help="Max rows to run."),
+    num_threads: int = typer.Option(8, "--num-threads", min=1, help="Parallel workers."),
+) -> None:
+    rows = load_rows(dataset, limit=limit)
+    for result in tqdm(run_in_parallel(rows, num_threads=num_threads), total=len(rows)):
+        write_result(result)
+```
+
+Keep the CLI orchestration thin and push dataset loading, execution, grading, and artifact writing into reusable functions/modules.
+
 ## Prompt improvement loops (hill climbing)
 
 Use automated loops carefully. The goal is to improve prompts without overfitting.
