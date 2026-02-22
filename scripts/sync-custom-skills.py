@@ -4,7 +4,7 @@
 # dependencies = ["typer>=0.12"]
 # ///
 
-"""Compile and verify `.custom` skills vs `.codex/skills` mirror."""
+"""Sync and verify `.custom` skills into the `.codex/skills` overlay."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CUSTOM_ROOT = REPO_ROOT / "skills" / ".custom"
 DEFAULT_MIRROR_ROOT = REPO_ROOT / ".codex" / "skills"
 
-app = typer.Typer(help="Compile and verify .custom skills mirror.")
+app = typer.Typer(help="Sync and verify .custom skills in the .codex/skills overlay.")
 
 
 def _resolve(path_like: str | Path) -> Path:
@@ -50,8 +50,6 @@ def sync_skills(custom_root: Path, mirror_root: Path, dry_run: bool = False) -> 
         else:
             legacy_marker.unlink()
 
-    expected: set[str] = set()
-
     for skill_dir in sorted(custom_root.iterdir()):
         if not skill_dir.is_dir():
             continue
@@ -59,7 +57,6 @@ def sync_skills(custom_root: Path, mirror_root: Path, dry_run: bool = False) -> 
             continue
 
         skill_name = skill_dir.name
-        expected.add(skill_name)
         target = mirror_root / skill_name
 
         if target.exists():
@@ -69,13 +66,15 @@ def sync_skills(custom_root: Path, mirror_root: Path, dry_run: bool = False) -> 
                 target.unlink()
         shutil.copytree(skill_dir, target)
 
-    for entry in sorted(mirror_root.iterdir()):
-        if not entry.is_dir():
-            continue
-        if not entry.name.startswith(".") and entry.name not in expected:
-            shutil.rmtree(entry)
-
-    return sorted(expected)
+    return [
+        skill_dir.name
+        for skill_dir in sorted(custom_root.iterdir())
+        if (
+            skill_dir.is_dir()
+            and not skill_dir.name.startswith(".")
+            and (skill_dir / "SKILL.md").is_file()
+        )
+    ]
 
 
 def list_skill_dirs(root: Path) -> dict[str, set[tuple[str, ...]]]:
@@ -100,23 +99,17 @@ def check_skills(custom_root: Path, mirror_root: Path) -> int:
     custom_names = set(custom_skills)
     mirror_names = set(mirror_skills)
 
-    if custom_names != mirror_names:
-        missing = custom_names - mirror_names
-        extra = mirror_names - custom_names
-        if missing:
-            raise SystemExit(
-                f"FAIL: missing mirrored skills in .codex/skills: {', '.join(sorted(missing))}"
-            )
-        if extra:
-            raise SystemExit(
-                f"FAIL: unexpected extra skills in .codex/skills: {', '.join(sorted(extra))}"
-            )
+    missing = custom_names - mirror_names
+    if missing:
+        raise SystemExit(
+            f"FAIL: missing mirrored skills in .codex/skills: {', '.join(sorted(missing))}"
+        )
 
     for name in sorted(custom_names):
         if custom_skills[name] != mirror_skills.get(name, set()):
             raise SystemExit(f"FAIL: mirroring mismatch for skill '{name}'")
 
-    print("PASS: .custom and .codex/skills are mirrored")
+    print("PASS: all .custom skills are mirrored in .codex/skills (extras allowed)")
     return 0
 
 
@@ -158,7 +151,7 @@ def sync(
         help="Show planned sync updates without writing files.",
     ),
 ) -> None:
-    """Copy `.custom` skills into `.codex/skills`."""
+    """Copy `.custom` skills into `.codex/skills` without deleting extra repo skills."""
     _run_sync(custom_root=custom_root, mirror_root=mirror_root, dry_run=dry_run)
 
 
@@ -175,7 +168,7 @@ def check(
         help="Target directory for mirrored skills.",
     ),
 ) -> None:
-    """Verify mirrored tree matches `.custom` exactly."""
+    """Verify every `.custom` skill exists and matches in `.codex/skills`."""
     _run_check(custom_root=custom_root, mirror_root=mirror_root)
 
 
