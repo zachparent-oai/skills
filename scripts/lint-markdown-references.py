@@ -322,7 +322,7 @@ def lint_markdown_references(
     *,
     root: Path = REPO_ROOT,
     scope: Literal["custom", "all"] = "custom",
-    web_mode: Literal["auto", "strict", "off"] = "auto",
+    web_mode: Literal["auto", "strict", "off"] = "strict",
     timeout_seconds: float = 5.0,
 ) -> int:
     files = _iter_markdown_files(root, scope)
@@ -384,9 +384,9 @@ def main(
         help="Markdown scan scope: custom (skills/.custom + .codex/skills) or all repo markdown.",
     ),
     web_mode: Literal["auto", "strict", "off"] = typer.Option(
-        "auto",
+        "strict",
         "--web-mode",
-        help="External URL checking mode: auto (skip network errors), strict, or off.",
+        help="External URL checking mode: strict (default), auto (skip network errors), or off.",
     ),
     timeout_seconds: float = typer.Option(
         5.0,

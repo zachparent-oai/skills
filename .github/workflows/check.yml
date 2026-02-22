@@ -36,6 +36,9 @@ jobs:
       - name: Run type checks
         run: uv run mypy
 
+      - name: Run markdown reference lint (strict)
+        run: uv run scripts/lint-markdown-references.py --scope custom
+
       - name: Run skill tests
         run: uv run scripts/test-custom-skills.py
 
