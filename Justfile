@@ -20,3 +20,7 @@ checks:
   uv run pre-commit run --all-files
   uv run scripts/test-custom-skills.py
   uv run scripts/run-skill-evals.py
+
+sync:
+  uv sync
+
