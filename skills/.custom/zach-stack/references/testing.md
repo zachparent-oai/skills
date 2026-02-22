@@ -42,4 +42,4 @@
 - `uv run scripts/validate-custom-skills.py` (default entrypoint)
 - `uv run scripts/run-skill-evals.py`
 - `uv run scripts/test-custom-skills.py`
-- `uv run scripts/sync-custom-skill.py sync --dry-run`
+- `uv run scripts/sync-custom-skills.py sync --dry-run`
