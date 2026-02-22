@@ -28,6 +28,24 @@ def run_command(command: list[str]) -> None:
 
 
 def run_pipeline() -> int:
+    print(
+        ">=> lint: markdown references "
+        "(skills/.custom only; web URLs auto-skip if offline)"
+    )
+    run_command(
+        [
+            "uv",
+            "run",
+            "scripts/lint-markdown-references.py",
+            "--scope",
+            "custom",
+            "--web-mode",
+            "auto",
+            "--timeout-seconds",
+            "2",
+        ]
+    )
+
     print(">=> lint: validate custom skill structure and markdown style")
     run_command(["uv", "run", "scripts/validate-custom-skills.py"])
 

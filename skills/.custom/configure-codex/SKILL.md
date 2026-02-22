@@ -29,7 +29,9 @@ Use this skill when asked to update Codex rules, command permissions, or environ
 
 ## Troubleshooting
 
-- If `.codex/rules` is not writable in the current workspace, update the user-level `/Users/zach.parent/.codex/rules/default.rules` after confirming scope and keep that in notes.
+- Prefer repo-scoped `.codex/rules/default.rules` when available.
+- Only use the user-level `$CODEX_HOME/rules/default.rules` after explicit scope confirmation.
+- If `.codex/rules` is not writable in the current workspace, update the user-level `$CODEX_HOME/rules/default.rules` after confirming scope and keep that in notes.
 
 ## References
 

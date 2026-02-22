@@ -33,4 +33,13 @@
 - `uv run scripts/validate-custom-skills.py` (default entrypoint)
 - `uv run scripts/run-skill-evals.py`
 - `uv run scripts/test-custom-skills.py`
-- `uv run scripts/sync-custom-skill.py sync --dry-run`
+- `uv run scripts/sync-custom-skills.py sync --dry-run`
+
+## Source-backed notes
+
+### Typer command organization
+
+- Source: [Typer Commands / SubCommands](https://typer.tiangolo.com/tutorial/commands/)
+- Excerpt (short): "SubCommands - Command Groups"
+- Why it matters for zach-stack: testing scope grows with command surface complexity.
+- Practical implication: keep single-purpose scripts as one command when possible; add subcommands only when behavior naturally groups.

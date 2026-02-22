@@ -3,6 +3,7 @@
 ## Frontend checks
 
 - For UI work, include interaction-level validation against real page behavior (manual Playwright flow check and automated checks where feasible).
+- Default Playwright regression tests should assert user-visible outcomes, use resilient locators, and rely on web-first assertions instead of manual timing assumptions.
 
 ## Web UI E2E strategy (JS/TS and Streamlit)
 

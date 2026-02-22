@@ -50,9 +50,20 @@ REQUIRED_SKILLS = {
             "codex-environment.md",
         }
     },
+    "troubleshoot-sandbox": {
+        "references": {
+            "triage-flow.md",
+            "error-signatures.md",
+            "filesystem-and-write-access.md",
+            "network-and-connectivity.md",
+            "rules-approvals-and-prefixes.md",
+            "configure-codex-handoff.md",
+        }
+    },
 }
 
 SKILL_NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+CROSS_SKILL_MD_REF_RE = re.compile(r"\.\./(?P<skill>[a-z0-9][a-z0-9-]*)/[^\s`)\]]*\.md\b")
 
 
 def fail(message: str, *, file: Path | None = None) -> None:
@@ -69,6 +80,15 @@ def check_markdown_lint(path: Path) -> None:
         fail("does not end with newline", file=path)
     if "\t" in content:
         fail("contains tabs", file=path)
+
+    match = CROSS_SKILL_MD_REF_RE.search(content)
+    if match:
+        skill = match.group("skill")
+        fail(
+            "direct cross-skill .md references are not allowed; "
+            f"use ${skill} and describe the needed reference inside that skill",
+            file=path,
+        )
 
     if path.name == "SKILL.md":
         if not content.startswith("---\n"):

@@ -1,6 +1,6 @@
 ---
 name: remember-that
-description: "Capture reusable rules or concepts learned from the user or during repo work, and persist them in the right docs file or AGENTS.md (kept light)."
+description: "Capture reusable rules or concepts learned from the user or during repo work, and persist them in the right docs file or root AGENTS file (kept light)."
 ---
 
 # Remember That
@@ -22,8 +22,8 @@ Capture durable guidance in the narrowest useful place so future agents and coll
 - Prefer updating an existing docs file that already covers the topic.
 - Prefer skill-specific `references/*.md` when the rule applies to one skill or workflow.
 - Create a focused `docs/<topic>.md` file when the rule is repo-level and no suitable doc exists.
-- Use `AGENTS.md` only for repo-wide agent behavior, constraints, or high-signal workflow rules.
-- Keep `AGENTS.md` concise; avoid long rationale/history.
+- Use the root [`AGENTS` file](../../../AGENTS.md) only for repo-wide agent behavior, constraints, or high-signal workflow rules.
+- Keep the root [`AGENTS` file](../../../AGENTS.md) concise; avoid long rationale/history.
 
 ## Workflow
 

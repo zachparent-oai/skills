@@ -15,6 +15,7 @@
 - For custom skills, `skills/.custom/<skill>` is the source of truth; `.codex/skills/<skill>` is a sync-generated mirror.
 - Do not manually edit `.codex/skills/<custom-skill>`; run `uv run scripts/sync-custom-skills.py sync` after updating `skills/.custom/<skill>`.
 - If `uv run scripts/sync-custom-skills.py check` fails after mirror-side edits, port the changes into `skills/.custom/<skill>` and sync again.
+- Do not run lint/content checks against `.codex/skills`; custom-skill linting should focus on `skills/.custom` (mirror sync/check is separate).
 - When adding guidance about another skill (for example `$playwright`), first check whether it is installed under `$CODEX_HOME/skills`; if not, document the `$skill-installer` path and any required restart step.
 - When documenting external tools in `references/`, include source links and short excerpts instead of long copied passages.
 

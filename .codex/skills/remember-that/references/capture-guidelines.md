@@ -5,7 +5,7 @@
 - **Existing docs file**: Use when the rule belongs to a current topic (testing, deployment, repo workflow, etc.).
 - **Skill `references/*.md`**: Use when the rule applies to a specific skill or a narrow workflow.
 - **`docs/<topic>.md`**: Use when the rule is repo-level, reusable, and no existing doc is a good fit.
-- **`AGENTS.md`**: Use only for repo-wide agent behavior, constraints, and compact operating rules.
+- **Root [`AGENTS` file](../../../../AGENTS.md)**: Use only for repo-wide agent behavior, constraints, and compact operating rules.
 
 ## What makes a good rule worth saving?
 
@@ -18,7 +18,7 @@
 
 - One-off debugging observations that will not recur.
 - Temporary status notes or task-specific progress logs.
-- Long narratives explaining the history of a decision in `AGENTS.md`.
+- Long narratives explaining the history of a decision in the root [`AGENTS` file](../../../../AGENTS.md).
 - Vague reminders without a clear trigger or action.
 
 ## Writing pattern
@@ -47,4 +47,4 @@ Use short, operational wording:
 
 - Prefer editing the narrowest relevant file over adding broad AGENTS rules.
 - Merge related rules into existing docs sections instead of creating scattered tiny notes.
-- If adding to `AGENTS.md`, keep the rule high-signal and implementation-agnostic.
+- If adding to the root [`AGENTS` file](../../../../AGENTS.md), keep the rule high-signal and implementation-agnostic.
