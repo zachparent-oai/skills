@@ -26,6 +26,7 @@
 ## Frontend checks
 
 - For UI work, include interaction-level validation against real page behavior (manual Playwright flow check and automated checks where feasible).
+- Default Playwright test style should assert user-visible outcomes, use resilient locators, and rely on web-first assertions instead of manual timing assumptions.
 
 ## Docs/test coupling
 
@@ -42,4 +43,30 @@
 - `uv run scripts/validate-custom-skills.py` (default entrypoint)
 - `uv run scripts/run-skill-evals.py`
 - `uv run scripts/test-custom-skills.py`
-- `uv run scripts/sync-custom-skill.py sync --dry-run`
+- `uv run scripts/sync-custom-skills.py sync --dry-run`
+
+## Source-backed notes
+
+### Playwright testing patterns
+
+- Source: [Playwright Best Practices](https://playwright.dev/docs/best-practices)
+- Excerpt (short): "Test user-visible behavior."
+- Why it matters for zach-stack: keeps frontend checks aligned to actual product behavior rather than implementation details.
+- Practical implication: write assertions around what users can see/do, not class names or internal component state.
+
+- Source: [Playwright Best Practices](https://playwright.dev/docs/best-practices)
+- Excerpt (short): "Use locators."
+- Why it matters for zach-stack: locators are more resilient and include retry/auto-waiting semantics.
+- Practical implication: prefer `getByRole` / `getByText` / `getByTestId` patterns in examples and default test scaffolds.
+
+- Source: [Playwright Best Practices](https://playwright.dev/docs/best-practices)
+- Excerpt (short): "Use web first assertions."
+- Why it matters for zach-stack: reduces flakiness from asynchronous UI updates.
+- Practical implication: use `await expect(...)` web-first assertions for visibility/text/state checks in CI paths.
+
+### Typer command organization
+
+- Source: [Typer Commands / SubCommands](https://typer.tiangolo.com/tutorial/commands/)
+- Excerpt (short): "SubCommands - Command Groups"
+- Why it matters for zach-stack: testing scope grows with command surface complexity.
+- Practical implication: keep single-purpose scripts as one command when possible; add subcommands only when behavior naturally groups.

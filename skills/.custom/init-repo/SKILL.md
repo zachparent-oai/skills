@@ -9,10 +9,11 @@ Use this skill when a user asks to start a new project or bootstrap an empty rep
 
 ## Workflow
 
-If required dependencies are missing in this environment, bootstrap them first:
+If dependent skills are needed for this workflow, use a local-first fallback order:
 
-- `$install-skills https://github.com/openai/skills/tree/main/skills/.custom/zach-stack`
-- `$install-skills https://github.com/openai/skills/tree/main/skills/.custom/configure-codex`
+- If `zach-stack` / `configure-codex` are already available in the session, use them directly.
+- If missing and network access is available, install via `$skill-installer` from the relevant repo/path (fork/local source preferred; GitHub path is a fallback).
+- If network access is unavailable, continue with local repo conventions and note the missing skill dependency in your plan/notes.
 
 1. Capture constraints and ask clarifying questions only if ambiguous.
 2. Choose a stack profile: web, python, visualization, or mixed.
@@ -37,4 +38,9 @@ If required dependencies are missing in this environment, bootstrap them first:
 ## References
 
 - Use `references/new-repo-runbook.md` for scaffold templates and command defaults.
-- Use `../zach-stack` for stack-specific decisions.
+
+## Reference usage map
+
+- Use `references/new-repo-runbook.md` for Phase 1 scaffold checklists, canonical command names, and acceptance criteria.
+- Use the `zach-stack` SKILL for stack selection decisions.
+- Read only the relevant `zach-stack/references/*.md` files for the chosen stack (for example `web.md`, `python.md`, `testing.md`, `docs.md`, `workspaces.md`).

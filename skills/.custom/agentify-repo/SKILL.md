@@ -9,10 +9,11 @@ Use this skill when asked to make an existing repo more agent-friendly without o
 
 ## Core goal
 
-If required dependencies are not installed in the current environment, bootstrap them first:
+If dependent skills are needed for this workflow, use a local-first fallback order:
 
-- `$install-skills https://github.com/openai/skills/tree/main/skills/.custom/zach-stack`
-- `$install-skills https://github.com/openai/skills/tree/main/skills/.custom/configure-codex`
+- If `zach-stack` / `configure-codex` are already available in the session, use them directly.
+- If missing and network access is available, install via `$skill-installer` from the relevant repo/path (fork/local source preferred; GitHub path is a fallback).
+- If network access is unavailable, continue with local repo conventions and note the missing skill dependency in your plan/notes.
 
 Set up harness/tooling in small, reversible steps that make the repo more verifiable and easier for agents to work with.
 
@@ -39,4 +40,11 @@ Set up harness/tooling in small, reversible steps that make the repo more verifi
 - `references/incremental-harness.md`
 - `references/convergence-phases.md`
 - `references/rollback-and-safety.md`
-- `../zach-stack` for target conventions.
+
+## Reference usage map
+
+- Use `references/incremental-harness.md` when defining Phase 1 "surface hardening" changes.
+- Use `references/convergence-phases.md` for phase boundaries, exit criteria, and pause points.
+- Use `references/rollback-and-safety.md` when writing validation and rollback checkpoints.
+- Use the `zach-stack` SKILL for stack selection decisions.
+- Read only the relevant `zach-stack/references/*.md` files for the chosen stack (for example `web.md`, `python.md`, `testing.md`, `docs.md`, `workspaces.md`).

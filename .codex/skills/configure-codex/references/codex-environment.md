@@ -15,5 +15,6 @@ Make agent work predictable and repeatable in local and customer environments.
 
 - Keep environment setup documented in `docs/`.
 - Separate repo updates from user-profile updates.
+- Document user-level rule changes in repo notes only when the repo now depends on them; otherwise keep the note in the change summary to avoid implying a repo requirement.
 - Validate environment commands after each phase.
 - Use conservative defaults and escalate only as needed.
