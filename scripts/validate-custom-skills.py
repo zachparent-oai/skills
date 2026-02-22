@@ -10,22 +10,33 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
+from typing import TypedDict
 
 import typer
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CUSTOM_ROOT = REPO_ROOT / "skills" / ".custom"
 
-REQUIRED_SKILLS = {
+
+class SkillRequirements(TypedDict, total=False):
+    references: set[str]
+    reference_paths: set[tuple[str, ...]]
+
+
+REQUIRED_SKILLS: dict[str, SkillRequirements] = {
     "zach-stack": {
         "references": {
             "web.md",
             "python.md",
-            "testing.md",
             "docs.md",
             "workspaces.md",
             "resources.md",
-        }
+        },
+        "reference_paths": {
+            ("references", "testing", "testing.md"),
+            ("references", "testing", "cli.md"),
+            ("references", "testing", "web-ui-e2e.md"),
+        },
     },
     "init-repo": {
         "references": {
@@ -187,6 +198,15 @@ def validate_references(skill_dir: Path, required: set[str]) -> None:
         check_markdown_lint(p)
 
 
+def validate_required_paths(skill_dir: Path, required_paths: set[tuple[str, ...]]) -> None:
+    for parts in sorted(required_paths):
+        path = skill_dir.joinpath(*parts)
+        if not path.exists():
+            fail(f"missing required path: {'/'.join(parts)}", file=skill_dir)
+        if path.is_file() and path.suffix == ".md":
+            check_markdown_lint(path)
+
+
 def run_validation(custom_root: Path = CUSTOM_ROOT) -> int:
     if not custom_root.exists():
         fail(".custom directory does not exist at skills/.custom")
@@ -203,8 +223,11 @@ def run_validation(custom_root: Path = CUSTOM_ROOT) -> int:
     for skill_dir in custom_skills:
         name = validate_frontmatter(skill_dir)
 
-        required = REQUIRED_SKILLS.get(name, {}).get("references", set())
-        validate_references(skill_dir, set(required))
+        requirements: SkillRequirements = REQUIRED_SKILLS.get(name, {})
+        required = set(requirements.get("references", set()))
+        validate_references(skill_dir, required)
+        required_paths = set(requirements.get("reference_paths", set()))
+        validate_required_paths(skill_dir, required_paths)
         validate_agents_config(skill_dir, name)
 
     print("PASS: custom skills lint and structure checks")

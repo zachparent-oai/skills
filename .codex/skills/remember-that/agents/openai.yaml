@@ -1,0 +1,4 @@
+interface:
+  display_name: "Remember That"
+  short_description: "Capture reusable rules into docs or AGENTS.md while keeping AGENTS light."
+  default_prompt: "Use $remember-that to capture a learned reusable rule in the right docs file or, when needed, AGENTS.md."

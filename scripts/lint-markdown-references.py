@@ -29,10 +29,7 @@ IGNORED_DIR_NAMES = {
     "node_modules",
     "__pycache__",
 }
-DEFAULT_MD_DIRS = (
-    Path("skills/.custom"),
-    Path(".codex/skills"),
-)
+DEFAULT_MD_DIRS = (Path("skills/.custom"),)
 PATHLIKE_CODE_PREFIXES = (
     "skills/",
     ".codex/skills/",
@@ -381,7 +378,7 @@ def main(
     scope: Literal["custom", "all"] = typer.Option(
         "custom",
         "--scope",
-        help="Markdown scan scope: custom (skills/.custom + .codex/skills) or all repo markdown.",
+        help="Markdown scan scope: custom (skills/.custom only) or all repo markdown.",
     ),
     web_mode: Literal["auto", "strict", "off"] = typer.Option(
         "strict",

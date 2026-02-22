@@ -9,6 +9,7 @@ Use when a project includes frontend code and needs a consistent, lightweight st
 - For dynamic client behavior, prefer lightweight React over heavy abstraction layers.
 - For quick prototypes/static pages, prefer Tailwind CLI or a minimal stylesheet pipeline.
 - For production apps, use `pnpm` as the package manager and wire Tailwind into the project build (not Play CDN).
+- For new JS/TS browser apps (including lightweight React apps), prefer `Vite` as the default build/dev tool unless a framework mandates its own toolchain.
 - For content-heavy or markdown-driven complex static sites, prefer Eleventy.
 - Workspace/monorepo-specific `pnpm` details live in [workspaces.md](workspaces.md).
 - Keep browser-facing code testable with at least:

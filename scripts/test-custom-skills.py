@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import subprocess
+import sys
 from pathlib import Path
 
 import typer
@@ -27,16 +28,17 @@ def run_command(command: list[str]) -> None:
         raise SystemExit(result.returncode)
 
 
+def run_python_script(script_path: str, *args: str) -> None:
+    run_command([sys.executable, str(ROOT / script_path), *args])
+
+
 def run_pipeline() -> int:
-    print(
-        ">=> lint: markdown references "
-        "(custom skill docs + mirrors; web URLs auto-skip if offline)"
-    )
+    print(">=> lint: markdown references " "(skills/.custom only; web URLs auto-skip if offline)")
     run_command(
         [
-            "uv",
-            "run",
-            "scripts/lint-markdown-references.py",
+            # Reuse the current Python env to avoid nested `uv run` startup overhead.
+            sys.executable,
+            str(ROOT / "scripts/lint-markdown-references.py"),
             "--scope",
             "custom",
             "--web-mode",
@@ -47,11 +49,11 @@ def run_pipeline() -> int:
     )
 
     print(">=> lint: validate custom skill structure and markdown style")
-    run_command(["uv", "run", "scripts/validate-custom-skills.py"])
+    run_python_script("scripts/validate-custom-skills.py")
 
     print(">=> sync+check: sync .custom skills and verify mirror")
-    run_command(["uv", "run", "scripts/sync-custom-skills.py", "sync"])
-    run_command(["uv", "run", "scripts/sync-custom-skills.py", "check"])
+    run_python_script("scripts/sync-custom-skills.py", "sync")
+    run_python_script("scripts/sync-custom-skills.py", "check")
 
     print("PASS: custom skill lint/tests complete")
     return 0

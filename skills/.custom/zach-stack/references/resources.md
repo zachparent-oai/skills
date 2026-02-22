@@ -17,8 +17,16 @@ Use this file as an annotated index when you need upstream docs to justify or re
 
 ## Web and tooling docs
 
+- [Playwright CLI (`microsoft/playwright-cli`)](https://github.com/microsoft/playwright-cli)
+  - Why: source for terminal-driven browser exploration guidance before codifying regressions.
 - [Playwright Best Practices](https://playwright.dev/docs/best-practices)
-  - Why: source for resilient locator/assertion guidance in `web.md` and `testing.md`.
+  - Why: source for resilient locator/assertion guidance in `web.md` and testing references.
+- [Playwright Writing Tests](https://playwright.dev/docs/writing-tests)
+  - Why: source for actionability/auto-waiting and test authoring guidance.
+- [Playwright Python test runners (pytest plugin)](https://playwright.dev/python/docs/test-runners)
+  - Why: source for Playwright Python + `pytest` guidance for Streamlit/Python web UIs.
+- [Playwright Codex skill docs (installable via `$skill-installer`)](https://skills.sh/openai/skills/playwright)
+  - Why: source for the `$playwright` skill framing and CLI-first exploration workflow.
 - [Tailwind CLI Installation](https://tailwindcss.com/docs/installation/tailwind-cli)
   - Why: source for lightweight Tailwind setup guidance.
 - [Tailwind Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
