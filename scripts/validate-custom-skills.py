@@ -10,13 +10,19 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
+from typing import TypedDict
 
 import typer
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CUSTOM_ROOT = REPO_ROOT / "skills" / ".custom"
 
-REQUIRED_SKILLS = {
+class SkillRequirements(TypedDict, total=False):
+    references: set[str]
+    reference_paths: set[tuple[str, ...]]
+
+
+REQUIRED_SKILLS: dict[str, SkillRequirements] = {
     "zach-stack": {
         "references": {
             "web.md",
@@ -216,10 +222,11 @@ def run_validation(custom_root: Path = CUSTOM_ROOT) -> int:
     for skill_dir in custom_skills:
         name = validate_frontmatter(skill_dir)
 
-        required = REQUIRED_SKILLS.get(name, {}).get("references", set())
-        validate_references(skill_dir, set(required))
-        required_paths = REQUIRED_SKILLS.get(name, {}).get("reference_paths", set())
-        validate_required_paths(skill_dir, set(required_paths))
+        requirements: SkillRequirements = REQUIRED_SKILLS.get(name, {})
+        required = set(requirements.get("references", set()))
+        validate_references(skill_dir, required)
+        required_paths = set(requirements.get("reference_paths", set()))
+        validate_required_paths(skill_dir, required_paths)
         validate_agents_config(skill_dir, name)
 
     print("PASS: custom skills lint and structure checks")
