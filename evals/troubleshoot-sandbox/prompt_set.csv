@@ -1,0 +1,6 @@
+prompt_id,prompt
+network_failure_sandbox,"A command like git fetch fails with 'Could not resolve host'. Help me figure out whether this is sandbox network access or something else."
+write_access_blocked,"My command can't write to a path and I need to know if it's a sandbox/write-permission problem or just a bad path."
+approval_or_rules_block,"This command is blocked and may need approval. Should I request escalation or update Codex rules?"
+missing_binary_vs_rules,"A command failed and I can't tell if the tool is missing or if the sandbox/rules blocked it."
+recurring_workflow_handoff,"This is a recurring repo command that keeps getting blocked. Help me decide whether to use configure-codex."

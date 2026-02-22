@@ -46,6 +46,16 @@ REQUIRED_SKILLS = {
             "codex-environment.md",
         }
     },
+    "troubleshoot-sandbox": {
+        "references": {
+            "triage-flow.md",
+            "error-signatures.md",
+            "filesystem-and-write-access.md",
+            "network-and-connectivity.md",
+            "rules-approvals-and-prefixes.md",
+            "configure-codex-handoff.md",
+        }
+    },
 }
 
 SKILL_NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
