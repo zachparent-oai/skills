@@ -48,6 +48,17 @@ Use this skill when asked to define or apply a preferred stack for a new/existin
 3. Confirm constraints that override defaults (security, infra, legacy platform).
 4. Apply only what is relevant for the project phase.
 
+For implementation details and version-sensitive guidance, load the source-backed notes in the relevant `references/*.md` files instead of relying on memory.
+
+## Reference usage map
+
+- Use `references/web.md` when choosing plain HTML/JS vs React, Tailwind setup shape, or Playwright usage patterns.
+- Use `references/python.md` for `uv`, Typer/Click tradeoffs, Streamlit/Plotly defaults, and Python workspace structure.
+- Use `references/testing.md` for CLI and frontend testing expectations (including resilient Playwright test style).
+- Use `references/docs.md` for living-docs expectations and completion criteria.
+- Use `references/workspaces.md` when deciding whether to split modules/workspaces now or later.
+- Use `references/resources.md` when you need upstream sources or a quick pointer to official docs.
+
 ## References
 
 - `references/web.md` for web defaults, CSS, and Playwright use.
