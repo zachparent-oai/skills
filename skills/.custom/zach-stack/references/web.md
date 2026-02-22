@@ -10,6 +10,7 @@ Use when a project includes frontend code and needs a consistent, lightweight st
 - Use Tailwind for styling defaults.
 - For content-heavy or markdown-driven complex static sites, use Eleventy.
 - Use `pnpm` as package manager by default for web tooling.
+- Use `Vite` as the default build/dev tool for new JS/TS browser apps (including lightweight React apps), unless a framework mandates its own toolchain.
 - Keep browser-facing code testable with at least:
   - unit-level checks for pure functions/components (or equivalent)
   - integration tests for user flows

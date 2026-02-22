@@ -26,6 +26,7 @@ Use this skill when asked to define or apply a preferred stack for a new/existin
 
 - **Minimal web by default**: prefer plain HTML/CSS/JS when requirements are simple.
 - **Dynamic web**: choose a lightweight React setup when needed for stateful interactions.
+- **JS/TS app tooling**: prefer Vite for new browser apps (especially React) unless framework-specific tooling is required.
 - **Complex static sites**: prefer Eleventy.
 - **CSS**: default to Tailwind.
 - **Python work**: use `uv` for package management and virtual environments.
@@ -52,7 +53,9 @@ Use this skill when asked to define or apply a preferred stack for a new/existin
 
 - `references/web.md` for web defaults, CSS, and Playwright use.
 - `references/python.md` for UV, workspace, and Python conventions.
-- `references/testing.md` for test structure expectations.
+- `references/testing/testing.md` for test principles and routing by project type.
+- `references/testing/cli.md` for CLI testing conventions.
+- `references/testing/web-ui-e2e.md` for Playwright/browser E2E workflows (JS/TS and Streamlit/Python).
 - `references/docs.md` for living docs patterns.
 - `references/workspaces.md` for shared workspaces in mixed stacks.
 - `references/resources.md` for external source references.

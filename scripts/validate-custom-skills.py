@@ -21,11 +21,15 @@ REQUIRED_SKILLS = {
         "references": {
             "web.md",
             "python.md",
-            "testing.md",
             "docs.md",
             "workspaces.md",
             "resources.md",
-        }
+        },
+        "reference_paths": {
+            ("references", "testing", "testing.md"),
+            ("references", "testing", "cli.md"),
+            ("references", "testing", "web-ui-e2e.md"),
+        },
     },
     "init-repo": {
         "references": {
@@ -167,6 +171,15 @@ def validate_references(skill_dir: Path, required: set[str]) -> None:
         check_markdown_lint(p)
 
 
+def validate_required_paths(skill_dir: Path, required_paths: set[tuple[str, ...]]) -> None:
+    for parts in sorted(required_paths):
+        path = skill_dir.joinpath(*parts)
+        if not path.exists():
+            fail(f"missing required path: {'/'.join(parts)}", file=skill_dir)
+        if path.is_file() and path.suffix == ".md":
+            check_markdown_lint(path)
+
+
 def run_validation(custom_root: Path = CUSTOM_ROOT) -> int:
     if not custom_root.exists():
         fail(".custom directory does not exist at skills/.custom")
@@ -185,6 +198,8 @@ def run_validation(custom_root: Path = CUSTOM_ROOT) -> int:
 
         required = REQUIRED_SKILLS.get(name, {}).get("references", set())
         validate_references(skill_dir, set(required))
+        required_paths = REQUIRED_SKILLS.get(name, {}).get("reference_paths", set())
+        validate_required_paths(skill_dir, set(required_paths))
         validate_agents_config(skill_dir, name)
 
     print("PASS: custom skills lint and structure checks")

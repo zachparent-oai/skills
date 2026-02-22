@@ -26,6 +26,7 @@ Use this skill when asked to define or apply a preferred stack for a new/existin
 
 - **Minimal web by default**: prefer plain HTML/CSS/JS when requirements are simple.
 - **Dynamic web**: choose a lightweight React setup when needed for stateful interactions.
+- **JS/TS app tooling**: prefer Vite for new browser apps (especially React) unless framework-specific tooling is required.
 - **Complex static sites**: prefer Eleventy.
 - **CSS**: default to Tailwind.
 - **Python work**: use `uv` for package management and virtual environments.

@@ -1,4 +1,4 @@
-# Testing conventions (`zach-stack`)
+# CLI testing conventions (`zach-stack`)
 
 ## CLI strategy defaults
 
@@ -22,15 +22,6 @@
   - validate success and failure paths
   - include edge-case tests around argument parsing and exit codes
 - For both, assert deterministic outputs where possible.
-
-## Frontend checks
-
-- For UI work, include interaction-level validation against real page behavior (manual Playwright flow check and automated checks where feasible).
-
-## Docs/test coupling
-
-- Every major behavior change should include an updated doc entry describing intent and validation command.
-- Avoid relying on broad integration tests only; use focused tests for failure isolation.
 
 ## CLI command style for single-command scripts
 
