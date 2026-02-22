@@ -1,0 +1,4 @@
+prompt_id,prompt
+choose_stack_defaults,"What stack defaults should we use for a new project so it stays testable and agent-friendly?"
+web_and_python_preferences,"Summarize your preferred web and Python tooling conventions for a repo."
+data_app_recommendation,"Recommend a stack for an analytics/data app with shared data and a lightweight UI."

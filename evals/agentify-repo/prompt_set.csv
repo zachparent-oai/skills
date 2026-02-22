@@ -1,0 +1,4 @@
+prompt_id,prompt
+incremental_harness_existing_repo,"Make this existing repo more agent-friendly, but do it incrementally and avoid risky broad rewrites."
+legacy_constraints_present,"Harden a legacy repo for agents. There are unknown constraints and we need reversible changes."
+rules_change_request,"Improve agent workflow in a repo and consider codex/rules changes only if necessary."

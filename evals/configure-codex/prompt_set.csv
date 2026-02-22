@@ -1,0 +1,4 @@
+prompt_id,prompt
+minimal_rules_update,"Update Codex rules for this repo, but keep the allowed commands minimal and only what the project needs."
+repo_vs_user_scope,"Set up Codex configuration for a repo, and explain when repo-scoped vs user-scoped settings should be used."
+rules_dir_not_writable,"Configure Codex, but assume the repo .codex/rules path is not writable."
