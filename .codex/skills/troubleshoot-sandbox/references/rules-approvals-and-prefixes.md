@@ -51,8 +51,8 @@ Use this file when a command is blocked, unexpectedly denied, or repeatedly need
 - Why it matters for troubleshooting: repeated "approval needed" prompts are not necessarily bugs.
 - Practical implication: decide whether the command needs one-time escalation or a persistent rule update.
 
-## Local references
+## Skill references
 
-- [`../../configure-codex/SKILL.md`](../../configure-codex/SKILL.md) for guarded workflow and scope decisions
-- [`../../configure-codex/references/rules-default.md`](../../configure-codex/references/rules-default.md) for rule syntax and `execpolicy` validation
-- [`../../configure-codex/references/allowed-commands-matrix.md`](../../configure-codex/references/allowed-commands-matrix.md) for minimal command family selection
+- `$configure-codex` for guarded workflow and scope decisions.
+- Within `$configure-codex`, read the rules defaults reference for rule syntax and `execpolicy` validation.
+- Within `$configure-codex`, read the allowed-commands matrix for minimal command family selection.

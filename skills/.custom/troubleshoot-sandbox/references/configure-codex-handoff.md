@@ -48,9 +48,9 @@ Use this file when sandbox troubleshooting indicates the user needs a persistent
 - Why it matters for handoff: persistent fixes may belong in repo config, user config, or rules depending on the failure.
 - Practical implication: include environment/scope context when requesting `configure-codex`.
 
-## Local references
+## Skill references
 
-- [`../../configure-codex/SKILL.md`](../../configure-codex/SKILL.md)
-- [`../../configure-codex/references/rules-default.md`](../../configure-codex/references/rules-default.md)
-- [`../../configure-codex/references/allowed-commands-matrix.md`](../../configure-codex/references/allowed-commands-matrix.md)
-- [`../../configure-codex/references/codex-environment.md`](../../configure-codex/references/codex-environment.md)
+- `$configure-codex` for the guarded workflow and scope decisions.
+- Within `$configure-codex`, read the rules defaults reference for rule syntax and validation.
+- Within `$configure-codex`, read the allowed-commands matrix for minimal command family selection.
+- Within `$configure-codex`, read the codex environment reference for repo-vs-user setup guidance.
