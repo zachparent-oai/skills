@@ -1,4 +1,4 @@
-name: skills-eval
+name: check
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  lint-and-test:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,20 +18,29 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run skill lint and structure tests
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: 0.10.0
+          enable-cache: true
+
+      - name: Install project dependencies
+        run: uv sync --locked
+
+      - name: Run lint checks
+        run: |
+          uv run ruff check scripts
+          uv run ruff format --check scripts
+
+      - name: Run type checks
+        run: uv run mypy
+
+      - name: Run skill tests
         run: uv run scripts/test-custom-skills.py
-
-  eval-skills-suite:
-    needs: lint-and-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
 
       - name: Run skill evals
         run: uv run scripts/run-skill-evals.py
+
+      - name: Prune uv cache for CI
+        if: always()
+        run: uv cache prune --ci
