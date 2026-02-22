@@ -1,0 +1,4 @@
+interface:
+  display_name: "Evals"
+  short_description: "Build and maintain eval datasets and harnesses"
+  default_prompt: "Use $evals to build or improve eval datasets, augmentation pipelines, or harnesses."
