@@ -10,7 +10,7 @@ Use when a project includes frontend code and needs a consistent, lightweight st
 - For quick prototypes/static pages, prefer Tailwind CLI or a minimal stylesheet pipeline.
 - For production apps, use `pnpm` as the package manager and wire Tailwind into the project build (not Play CDN).
 - For content-heavy or markdown-driven complex static sites, prefer Eleventy.
-- Workspace/monorepo-specific `pnpm` details live in `references/workspaces.md`.
+- Workspace/monorepo-specific `pnpm` details live in [workspaces.md](workspaces.md).
 - Keep browser-facing code testable with at least:
   - unit-level checks for pure functions/components (or equivalent)
   - integration tests for user flows
