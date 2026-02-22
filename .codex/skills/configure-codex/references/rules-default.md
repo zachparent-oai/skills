@@ -18,7 +18,6 @@
 
 - Propose a diff, confirm with user, then apply.
 - Re-check the rule set after each commit boundary.
-
 ## Example `prefix_rule` syntax
 
 ```python
@@ -41,11 +40,8 @@ Use `match` and `not_match` as inline rule tests so malformed patterns fail fast
 Run a rule check after updating `default.rules`:
 
 ```bash
-codex execpolicy check --pretty \
-  --rules ~/.codex/rules/default.rules \
-  -- uv sync
+codex execpolicy check --pretty --rules .codex/rules/default.rules -- uv sync
 ```
 
 Use the same command for any command you changed in the allow list.
 
-If `codex execpolicy` reports a failure, fix the rule file and re-run the check.
