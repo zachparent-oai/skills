@@ -71,7 +71,8 @@ def check_markdown_lint(path: Path) -> None:
     if match:
         skill = match.group("skill")
         fail(
-            f"direct cross-skill .md references are not allowed; use ${skill} and describe the needed reference inside that skill",
+            "direct cross-skill .md references are not allowed; "
+            f"use ${skill} and describe the needed reference inside that skill",
             file=path,
         )
 

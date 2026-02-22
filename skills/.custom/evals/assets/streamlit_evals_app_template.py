@@ -8,7 +8,6 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-
 st.set_page_config(page_title="Eval Runner", layout="wide")
 
 
@@ -174,7 +173,8 @@ def main() -> None:
     run_cols = st.columns([1, 3])
     run_clicked = run_cols[0].button("Run eval", type="primary")
     run_cols[1].caption(
-        "Keep this button on small subsets while integrating the harness. Add a separate full-run flow later."
+        "Keep this button on small subsets while integrating the harness. "
+        "Add a separate full-run flow later."
     )
 
     if run_clicked:

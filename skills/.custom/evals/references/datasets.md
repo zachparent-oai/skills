@@ -58,11 +58,11 @@ g003,tooling,"Summarize this URL","use_tool_then_summarize","trajectory","Requir
 
 ## Augmentation strategy (scripted, committed, reproducible)
 
-Prefer long-lived scripts in the project repo such as:
+Prefer long-lived scripts in the project repo (often in a `scripts` folder), such as:
 
-- `scripts/augment_eval_dataset.py`
-- `scripts/convert_eval_dataset.py`
-- `scripts/build_eval_splits.py`
+- `augment_eval_dataset.py`
+- `convert_eval_dataset.py`
+- `build_eval_splits.py`
 
 Avoid ad hoc notebook cells for production eval data generation.
 
