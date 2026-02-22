@@ -30,6 +30,15 @@ Use for Python-heavy or mixed repos with Python services/modules.
 - If the project is small and one-purpose, keep one workspace/project and add explicit module boundaries.
 - Keep Streamlit app and backend together initially if the app is thin and owned by one team; split when shared contracts or release cadence diverge.
 
+## Streamlit eval and analytics app guidance
+
+- Keep Streamlit as a thin UI over stable data loaders and eval/harness modules.
+- Default UI actions to small subset runs first (`limit`, category filter, sample seed).
+- Reuse the same run artifact formats as CLI eval runs (config, results, summary, failures).
+- Prefer Plotly charts for pass-rate and latency/cost breakdowns by category.
+- Persist run IDs and expose row-level failure inspection, not only aggregate metrics.
+- Reserve large/full-dataset runs for an explicit action after the harness is stable.
+
 ## Maintenance and tests
 
 - Keep unit tests near implementation modules.
