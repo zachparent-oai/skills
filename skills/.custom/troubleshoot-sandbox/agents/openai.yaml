@@ -1,0 +1,4 @@
+interface:
+  display_name: "Troubleshoot Sandbox"
+  short_description: "Diagnose sandbox, permissions, network, and command execution failures in Codex."
+  default_prompt: "Use $troubleshoot-sandbox to diagnose why a command failed (sandbox, write access, network, rules, or missing tools) and suggest the safest next step."
