@@ -27,6 +27,10 @@ Use this skill when asked to update Codex rules, command permissions, or environ
 - Prefer repo-only permissions over broad global overrides.
 - Add no commands that are not used by the project.
 
+## Troubleshooting
+
+- If `.codex/rules` is not writable in the current workspace, update the user-level `/Users/zach.parent/.codex/rules/default.rules` after confirming scope and keep that in notes.
+
 ## References
 
 - `references/rules-default.md`

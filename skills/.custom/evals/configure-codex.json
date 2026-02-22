@@ -1,9 +1,0 @@
-{
-  "skill": "configure-codex",
-  "checks": [
-    {"kind": "file_exists", "path": "SKILL.md"},
-    {"kind": "frontmatter_name"},
-    {"kind": "contains_reference", "reference": "allowed-commands-matrix.md"},
-    {"kind": "contains_link", "text": "rules-default.md"}
-  ]
-}

@@ -1,0 +1,4 @@
+prompt_id,prompt
+bootstrap_python_repo,"Start a new Python project and scaffold a minimal but complete phase-1 repository for agent-friendly work."
+bootstrap_mixed_repo,"Initialize a mixed project repo with docs, testing, and repeatable commands, but keep it incremental."
+rules_confirmation_needed,"Bootstrap a new repo and suggest Codex rules only if the user explicitly confirms."
