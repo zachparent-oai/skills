@@ -25,6 +25,7 @@ description: "Use only when the user explicitly asks to stage, commit, push, and
 - Run checks if not already. If checks fail due to missing deps/tools, install dependencies and rerun once.
 - Push with tracking: `git push -u origin $(git branch --show-current)`
 - If git push fails due to workflow auth errors, pull from master and retry the push.
+- Always open the PR against the `origin` repository (the branch you pushed), not `upstream`. If both remotes exist, pass `--repo <origin-owner>/<origin-repo>` to `gh pr create`.
 - Open a PR and edit title/body to reflect the description and the deltas: `GH_PROMPT_DISABLED=1 GIT_TERMINAL_PROMPT=0 gh pr create --draft --fill --head $(git branch --show-current)`
 - Write the PR description to a temp file with real newlines (e.g. pr-body.md ... EOF) and run pr-body.md to avoid \\n-escaped markdown.
 - PR description (markdown) must be detailed prose covering the issue, the cause and effect on users, the root cause, the fix, and any tests or checks used to validate.
