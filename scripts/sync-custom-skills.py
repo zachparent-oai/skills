@@ -105,11 +105,11 @@ def check_skills(custom_root: Path, mirror_root: Path) -> int:
         extra = mirror_names - custom_names
         if missing:
             raise SystemExit(
-                "FAIL: missing mirrored skills in .codex/skills:" f" {', '.join(sorted(missing))}"
+                f"FAIL: missing mirrored skills in .codex/skills: {', '.join(sorted(missing))}"
             )
         if extra:
             raise SystemExit(
-                "FAIL: unexpected extra skills in .codex/skills:" f" {', '.join(sorted(extra))}"
+                f"FAIL: unexpected extra skills in .codex/skills: {', '.join(sorted(extra))}"
             )
 
     for name in sorted(custom_names):

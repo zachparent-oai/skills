@@ -25,11 +25,7 @@ def run_eval(skill_name: str, spec: dict[str, object]) -> dict[str, object]:
     checks_raw = spec.get("checks", [])
     checks: list[dict[str, Any]]
     if isinstance(checks_raw, list):
-        checks = [
-            check
-            for check in checks_raw
-            if isinstance(check, dict)
-        ]
+        checks = [check for check in checks_raw if isinstance(check, dict)]
     else:
         checks = []
     passed = 0

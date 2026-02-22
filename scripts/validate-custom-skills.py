@@ -114,7 +114,7 @@ def validate_frontmatter(skill_dir: Path) -> str:
     name = fm["name"].strip()
     if not SKILL_NAME_RE.match(name):
         fail(
-            f"invalid skill name '{name}' in frontmatter; " "expected lower-case hyphen name",
+            f"invalid skill name '{name}' in frontmatter; expected lower-case hyphen name",
             file=skill_path,
         )
 
