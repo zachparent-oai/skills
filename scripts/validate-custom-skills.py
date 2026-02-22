@@ -17,6 +17,7 @@ import typer
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CUSTOM_ROOT = REPO_ROOT / "skills" / ".custom"
 
+
 class SkillRequirements(TypedDict, total=False):
     references: set[str]
     reference_paths: set[tuple[str, ...]]

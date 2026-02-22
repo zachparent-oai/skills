@@ -29,9 +29,7 @@ IGNORED_DIR_NAMES = {
     "node_modules",
     "__pycache__",
 }
-DEFAULT_MD_DIRS = (
-    Path("skills/.custom"),
-)
+DEFAULT_MD_DIRS = (Path("skills/.custom"),)
 PATHLIKE_CODE_PREFIXES = (
     "skills/",
     ".codex/skills/",

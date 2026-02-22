@@ -9,8 +9,8 @@
 from __future__ import annotations
 
 import subprocess
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import typer
 
@@ -33,10 +33,7 @@ def run_python_script(script_path: str, *args: str) -> None:
 
 
 def run_pipeline() -> int:
-    print(
-        ">=> lint: markdown references "
-        "(skills/.custom only; web URLs auto-skip if offline)"
-    )
+    print(">=> lint: markdown references " "(skills/.custom only; web URLs auto-skip if offline)")
     run_command(
         [
             # Reuse the current Python env to avoid nested `uv run` startup overhead.
